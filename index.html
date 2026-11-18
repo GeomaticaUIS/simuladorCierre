@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   Simulador de cierre | FNTC 613-2023
+  </title>
+  <link href="styles.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <header class="top">
+   <div class="topright">
+    Corte de informaci&oacute;n
+    <br/>
+    <b id="cutoff">
+    </b>
+   </div>
+   <div class="eyebrow">
+    Herramienta de planeaci&oacute;n &middot; FNTC 613-2023
+   </div>
+   <h1>
+    Simulador de cierre del proyecto
+   </h1>
+   <p>
+    Proyecci&oacute;n din&aacute;mica de instalaciones, autoridades, tiempos y escenarios de cierre
+   </p>
+  </header>
+  <main class="wrap">
+   <div class="toolbar">
+    <button class="btn primary" onclick="resetAll()">
+     Restablecer simulaci&oacute;n
+    </button>
+    <span class="note">
+     Prototipo local &middot; Los datos originales del Excel no se modifican
+    </span>
+   </div>
+   <section class="grid" id="metrics">
+   </section>
+   <section class="section">
+    <div class="section-head">
+     <div>
+      <h2>
+       Par&aacute;metros de simulaci&oacute;n
+      </h2>
+      <div class="sub">
+       Modifique los supuestos y observe c&oacute;mo cambian las fechas proyectadas.
+      </div>
+     </div>
+    </div>
+    <div class="panel">
+     <div class="controls">
+      <div class="field">
+       <label for="scenario">
+        Escenario de tiempos
+       </label>
+       <select id="scenario">
+        <option value="base">
+         Base Excel (sin ajustes)
+        </option>
+        <option value="optimista">
+         Optimista (m&iacute;nimos hist&oacute;ricos)
+        </option>
+        <option value="medio">
+         Medio (promedios hist&oacute;ricos)
+        </option>
+        <option value="pesimista">
+         Pesimista (m&aacute;ximos / conservador)
+        </option>
+       </select>
+      </div>
+      <div class="field">
+       <label for="optimization">
+        Optimizaci&oacute;n del tiempo restante
+       </label>
+       <input id="optimization" max="30" min="0" step="5" type="range" value="0"/>
+       <div class="value" id="optimizationVal">
+        0 % &middot; reduce d&iacute;as desde el corte
+       </div>
+      </div>
+      <div class="field">
+       <label for="decisionDelay">
+        Demora en toma de decisiones (d&iacute;as)
+       </label>
+       <input id="decisionDelay" max="365" min="0" type="number" value="0"/>
+       <div class="value">
+        Se aplica a las instalaciones pendientes
+       </div>
+      </div>
+      <div class="field">
+       <label for="relocationDelay">
+        Demora por relocalizaci&oacute;n (d&iacute;as)
+       </label>
+       <input id="relocationDelay" max="365" min="0" type="number" value="0"/>
+       <div class="value">
+        Se aplica a los 5 casos identificados
+       </div>
+      </div>
+      <div class="field">
+       <label for="installAdjust">
+        Ajuste adicional de instalaci&oacute;n (d&iacute;as)
+       </label>
+       <input id="installAdjust" max="180" min="-90" type="number" value="0"/>
+       <div class="value">
+        Ajusta la fecha final de instalaci&oacute;n
+       </div>
+      </div>
+     </div>
+     <div class="scenario-explain" id="scenarioExplain">
+     </div>
+     <div class="compare" id="compare">
+     </div>
+    </div>
+   </section>
+   <section class="section">
+    <div class="section-head">
+     <div>
+      <h2>
+       Proyecci&oacute;n acumulada de instalaciones
+      </h2>
+      <div class="sub">
+       Comparación de fechas del Excel con escenarios simulados. El eje muestra los 44 sitios de esta hoja, no instalaciones ya ejecutadas.
+      </div>
+     </div>
+    </div>
+    <div class="panel">
+     <div class="fact-projection-legend" aria-label="Leyenda de tipos de información">
+      <span><i class="legend-swatch fact-swatch"></i>Dato reportado en Excel</span>
+      <span><i class="legend-swatch projection-swatch"></i>Fecha proyectada o simulada</span>
+     </div>
+     <div class="scenario-chart-legend" id="chartLegend"></div>
+     <div class="scenario-chart" id="chart" role="img" aria-label="Gráfica acumulada comparando proyección base y escenarios de instalación">
+     </div>
+     <div class="foot" id="chartFoot">
+     </div>
+    </div>
+   </section>
+   <section class="section hidden">
+    <div class="section-head">
+     <div>
+      <h2>
+       Mapa geogr&aacute;fico de los sitios
+      </h2>
+      <div class="sub">
+       Ubicaci&oacute;n de los embarcaderos a partir de las coordenadas de latitud y longitud del Excel.
+      </div>
+     </div>
+     <div class="sub" id="mapCount">
+     </div>
+    </div>
+    <div class="panel">
+     <div class="map-legend">
+      <span>
+       <i class="legend-dot" style="background:#17845b">
+       </i>
+       En instalaci&oacute;n
+      </span>
+      <span>
+       <i class="legend-dot" style="background:#b7791f">
+       </i>
+       Pendiente / en tr&aacute;mite
+      </span>
+      <span>
+       <i class="legend-dot" style="background:#b33b3b">
+       </i>
+       Relocalizaci&oacute;n
+      </span>
+      <span>
+       <i class="legend-dot" style="background:#718096">
+       </i>
+       Sin estado
+      </span>
+     </div>
+     <div aria-label="Mapa interactivo de sitios de embarcaderos" id="map" role="application">
+     </div>
+     <div class="map-note" id="mapNote">
+     </div>
+    </div>
+   </section>
+   <section class="section">
+    <div class="section-head">
+     <div>
+      <h2>
+       Detalle por instalaci&oacute;n
+      </h2>
+      <div class="sub">
+       Filtre registros y agregue ajustes individuales para probar retrasos o adelantos.
+      </div>
+     </div>
+    </div>
+    <div class="panel">
+     <div class="filters">
+      <input id="search" placeholder="Buscar instalaci&oacute;n, municipio o autoridad&hellip;"/>
+      <select id="deptFilter">
+       <option value="">
+        Todos los departamentos
+       </option>
+      </select>
+      <select id="statusFilter">
+       <option value="">
+        Todos los estados
+       </option>
+      </select>
+     </div>
+      <div class="fact-projection-legend table-legend">
+       <span><i class="legend-swatch fact-swatch"></i>Registro / estado reportado</span>
+       <span><i class="legend-swatch projection-swatch"></i>Proyección (no confirma ejecución)</span>
+      </div>
+      <div class="tablebox">
+      <table>
+       <thead>
+        <tr>
+         <th>
+          Inst.
+         </th>
+         <th>
+          Municipio
+         </th>
+         <th>
+          Departamento
+         </th>
+         <th>
+          Autoridad ambiental
+         </th>
+         <th>
+          Autoridad transporte
+         </th>
+         <th>
+          Estado
+         </th>
+         <th>
+          <span class="fact-heading">Solicitud POC registrada</span>
+         </th>
+         <th>
+          <span class="projection-heading">Proyección POC</span>
+         </th>
+         <th>
+          <span class="projection-heading">Proyección ACOR</span>
+         </th>
+         <th>
+          <span class="projection-heading">Instalación estimada</span>
+         </th>
+         <th>
+          Ajuste individual (d&iacute;as)
+         </th>
+        </tr>
+       </thead>
+       <tbody id="rows">
+       </tbody>
+      </table>
+     </div>
+     <div class="foot" id="tableFoot">
+     </div>
+    </div>
+   </section>
+   <section class="section">
+    <div class="section-head">
+     <div>
+      <h2>
+       Par&aacute;metros hist&oacute;ricos incorporados
+      </h2>
+      <div class="sub">
+       Valores tomados de las tablas de plazos incluidas en el libro de Excel (d&iacute;as calendario).
+      </div>
+     </div>
+    </div>
+    <div class="panel" style="overflow:auto">
+     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;min-width:600px">
+      <div>
+       <b>
+        Autoridades ambientales
+       </b>
+       <div class="duration-legend">
+        <span><i class="duration-dot marker-plazo"></i>Plazo</span>
+        <span><i class="duration-dot marker-average"></i>Promedio</span>
+        <span><i class="duration-dot marker-minimum"></i>Mínimo</span>
+       </div>
+       <div class="duration-scale"><span>0</span><span id="aaScaleMax"></span></div>
+       <table style="min-width:0;margin-top:8px">
+        <thead>
+         <tr>
+          <th>
+           Corporaci&oacute;n
+          </th>
+          <th>
+           Plazo registrado
+          </th>
+          <th>
+           Medio
+          </th>
+          <th>
+           M&iacute;nimo
+          </th>
+          <th>Comparación (días calendario)</th>
+         </tr>
+        </thead>
+        <tbody id="aaTable">
+        </tbody>
+       </table>
+      </div>
+      <div>
+       <b>
+        Autoridades de transporte
+       </b>
+       <div class="duration-legend">
+        <span><i class="duration-dot marker-average"></i>Promedio</span>
+        <span><i class="duration-dot marker-range"></i>Rango mínimo–máximo</span>
+       </div>
+       <div class="duration-scale"><span>0</span><span id="atScaleMax"></span></div>
+       <table style="min-width:0;margin-top:8px">
+        <thead>
+         <tr>
+          <th>
+           Autoridad
+          </th>
+          <th>
+           Promedio
+          </th>
+          <th>
+           M&aacute;ximo
+          </th>
+          <th>
+           M&iacute;nimo
+          </th>
+          <th>Rango (días calendario)</th>
+         </tr>
+        </thead>
+        <tbody id="atTable">
+        </tbody>
+       </table>
+      </div>
+     </div>
+     <div class="foot">
+      Nota: el simulador usa las 15 corporaciones ambientales y las 2 autoridades de transporte contenidas exactamente en las tablas hist&oacute;ricas del Excel. Las corporaciones ambientales presentes en los registros, pero ausentes de esa tabla (CDA, CORPORINOQUIA y CVC), conservan la proyecci&oacute;n del Excel sin aplicar ajustes hist&oacute;ricos inventados. El gr&aacute;fico del slide 20 muestra d&iacute;as h&aacute;biles de otra fuente; aqu&iacute; se mantienen separados los plazos del Excel, expresados en d&iacute;as calendario.
+     </div>
+    </div>
+   </section>
+   <div class="flag">
+    <b>
+     Consideraciones para validar:
+    </b>
+    las fechas originales T, U y V se conservan como referencia. Los escenarios optimista, medio y pesimista ajustan esas proyecciones mediante diferencias de tiempos hist&oacute;ricos por autoridad. Ninguna instalaci&oacute;n proyectada puede quedar antes de la fecha de corte (13/11/2026): si un escenario o ajuste la adelanta m&aacute;s all&aacute;, se fija en el corte. Esta es una regla de simulaci&oacute;n propuesta para el prototipo y debe validarse con Sandy antes de adoptarla como metodolog&iacute;a oficial. Los registros sin estado se muestran como &laquo;Sin estado registrado&raquo;; no se infiere que est&eacute;n ejecutados.
+   </div>
+   <div class="foot" style="text-align:center;margin-top:20px">
+    Prototipo de trabajo &middot; Fuente: hoja &laquo;PLAN DE CIERRE FNTC 613-2023&raquo; &middot; Corte consignado: 13/11/2026 &middot; Piso de instalaci&oacute;n: 17/11/2026
+   </div>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js">
+  </script>
+  <script src="app.js"></script>
+ </body>
+</html>
+  
