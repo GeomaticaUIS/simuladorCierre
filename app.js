@@ -1,60 +1,8 @@
 const DATA = {
-  "cutoff": "2026-11-17",
+  "cutoff": "2026-12-20",
   "sites": [
     {
       "row": 3,
-      "instalacion": 45,
-      "codmun": 94001,
-      "cod_cotecmar": 57,
-      "item": 83,
-      "aa": "CDA",
-      "at": "INVIAS",
-      "municipio": "INÍRIDA - EL VENADO",
-      "departamento": "GUAINÍA",
-      "convenio": "2025-05-03",
-      "remision_aa": "2025-06-05",
-      "auto_inicio": "2026-05-06",
-      "visita": "2026-04-15",
-      "res_aa": "2026-07-14",
-      "remision_at": "2026-01-21",
-      "res_at": "2026-08-28",
-      "estado": "En Instalación",
-      "solicitud_poc": "2025-06-05",
-      "poc": "2026-07-14",
-      "acor": "2026-08-28",
-      "instalacion_proj": "2026-11-17",
-      "buffer_inst": 80,
-      "lat": 3.44702194444445,
-      "lon": -67.9916113888889
-    },
-    {
-      "row": 4,
-      "instalacion": 46,
-      "codmun": 94001,
-      "cod_cotecmar": 58,
-      "item": 84,
-      "aa": "CDA",
-      "at": "INVIAS",
-      "municipio": "INÍRIDA - EL REMANSO",
-      "departamento": "GUAINÍA",
-      "convenio": "2025-05-02",
-      "remision_aa": "2025-06-05",
-      "auto_inicio": "2026-05-06",
-      "visita": "2026-04-15",
-      "res_aa": "2026-07-14",
-      "remision_at": "2026-01-21",
-      "res_at": "2026-08-28",
-      "estado": "En Instalación",
-      "solicitud_poc": "2025-06-05",
-      "poc": "2026-07-14",
-      "acor": "2026-08-28",
-      "instalacion_proj": "2026-12-17",
-      "buffer_inst": 80,
-      "lat": 3.471576944,
-      "lon": -67.96206611
-    },
-    {
-      "row": 5,
       "instalacion": 47,
       "codmun": 13074,
       "cod_cotecmar": 9,
@@ -80,7 +28,7 @@ const DATA = {
       "lon": -71.43158333
     },
     {
-      "row": 6,
+      "row": 4,
       "instalacion": 48,
       "codmun": 13160,
       "cod_cotecmar": 42,
@@ -106,7 +54,7 @@ const DATA = {
       "lon": -71.0976033333333
     },
     {
-      "row": 7,
+      "row": 5,
       "instalacion": 49,
       "codmun": 81065,
       "cod_cotecmar": 86,
@@ -132,7 +80,7 @@ const DATA = {
       "lon": -74.10623
     },
     {
-      "row": 8,
+      "row": 6,
       "instalacion": 50,
       "codmun": 81591,
       "cod_cotecmar": 88,
@@ -158,7 +106,7 @@ const DATA = {
       "lon": -73.9133369444445
     },
     {
-      "row": 9,
+      "row": 7,
       "instalacion": 51,
       "codmun": 15047,
       "cod_cotecmar": 74,
@@ -184,7 +132,7 @@ const DATA = {
       "lon": -72.9058202777778
     },
     {
-      "row": 10,
+      "row": 8,
       "instalacion": 52,
       "codmun": 15572,
       "cod_cotecmar": 46,
@@ -210,7 +158,7 @@ const DATA = {
       "lon": -74.5960869444444
     },
     {
-      "row": 11,
+      "row": 9,
       "instalacion": 53,
       "codmun": 13549,
       "cod_cotecmar": 20,
@@ -236,7 +184,7 @@ const DATA = {
       "lon": -76.4927083333333
     },
     {
-      "row": 12,
+      "row": 10,
       "instalacion": 54,
       "codmun": 73770,
       "cod_cotecmar": 61,
@@ -262,7 +210,7 @@ const DATA = {
       "lon": -74.4805141666667
     },
     {
-      "row": 13,
+      "row": 11,
       "instalacion": 55,
       "codmun": 99001,
       "cod_cotecmar": 76,
@@ -288,7 +236,7 @@ const DATA = {
       "lon": -74.83426722
     },
     {
-      "row": 14,
+      "row": 12,
       "instalacion": 56,
       "codmun": 76126,
       "cod_cotecmar": 66,
@@ -314,7 +262,7 @@ const DATA = {
       "lon": -77.88218639
     },
     {
-      "row": 15,
+      "row": 13,
       "instalacion": 57,
       "codmun": 81001,
       "cod_cotecmar": 85,
@@ -340,7 +288,7 @@ const DATA = {
       "lon": -70.2346477777778
     },
     {
-      "row": 16,
+      "row": 14,
       "instalacion": 58,
       "codmun": 19318,
       "cod_cotecmar": 67,
@@ -366,7 +314,7 @@ const DATA = {
       "lon": -67.639803
     },
     {
-      "row": 17,
+      "row": 15,
       "instalacion": 59,
       "codmun": 97001,
       "cod_cotecmar": 71,
@@ -392,7 +340,7 @@ const DATA = {
       "lon": -70.74977972
     },
     {
-      "row": 18,
+      "row": 16,
       "instalacion": 60,
       "codmun": 13468,
       "cod_cotecmar": 7,
@@ -418,7 +366,7 @@ const DATA = {
       "lon": -74.4169502777778
     },
     {
-      "row": 19,
+      "row": 17,
       "instalacion": 61,
       "codmun": 23068,
       "cod_cotecmar": 35,
@@ -444,7 +392,7 @@ const DATA = {
       "lon": -75.1371061111111
     },
     {
-      "row": 20,
+      "row": 18,
       "instalacion": 62,
       "codmun": 68573,
       "cod_cotecmar": 40,
@@ -470,7 +418,7 @@ const DATA = {
       "lon": -74.1011861111111
     },
     {
-      "row": 21,
+      "row": 19,
       "instalacion": 63,
       "codmun": 68081,
       "cod_cotecmar": 39,
@@ -496,7 +444,7 @@ const DATA = {
       "lon": -74.0342361111111
     },
     {
-      "row": 22,
+      "row": 20,
       "instalacion": 64,
       "codmun": 5591,
       "cod_cotecmar": 91,
@@ -522,7 +470,7 @@ const DATA = {
       "lon": -76.71429056
     },
     {
-      "row": 23,
+      "row": 21,
       "instalacion": 65,
       "codmun": 13580,
       "cod_cotecmar": 27,
@@ -548,7 +496,7 @@ const DATA = {
       "lon": -74.64004722
     },
     {
-      "row": 24,
+      "row": 22,
       "instalacion": 66,
       "codmun": 13042,
       "cod_cotecmar": 33,
@@ -574,7 +522,7 @@ const DATA = {
       "lon": -77.11191667
     },
     {
-      "row": 25,
+      "row": 23,
       "instalacion": 67,
       "codmun": 13442,
       "cod_cotecmar": 96,
@@ -600,7 +548,7 @@ const DATA = {
       "lon": -76.66265
     },
     {
-      "row": 26,
+      "row": 24,
       "instalacion": 68,
       "codmun": 47675,
       "cod_cotecmar": 3,
@@ -626,7 +574,7 @@ const DATA = {
       "lon": -73.8205358333333
     },
     {
-      "row": 27,
+      "row": 25,
       "instalacion": 69,
       "codmun": 19780,
       "cod_cotecmar": 79,
@@ -652,7 +600,7 @@ const DATA = {
       "lon": -73.8827333333333
     },
     {
-      "row": 28,
+      "row": 26,
       "instalacion": 70,
       "codmun": 68092,
       "cod_cotecmar": 90,
@@ -678,7 +626,7 @@ const DATA = {
       "lon": -75.40679722
     },
     {
-      "row": 29,
+      "row": 27,
       "instalacion": 71,
       "codmun": 19809,
       "cod_cotecmar": 94,
@@ -704,7 +652,7 @@ const DATA = {
       "lon": -74.7154175
     },
     {
-      "row": 30,
+      "row": 28,
       "instalacion": 72,
       "codmun": 17495,
       "cod_cotecmar": null,
@@ -730,7 +678,7 @@ const DATA = {
       "lon": -73.34431639
     },
     {
-      "row": 31,
+      "row": 29,
       "instalacion": 73,
       "codmun": 27615,
       "cod_cotecmar": 81,
@@ -756,7 +704,7 @@ const DATA = {
       "lon": -75.82063306
     },
     {
-      "row": 32,
+      "row": 30,
       "instalacion": 74,
       "codmun": 27001,
       "cod_cotecmar": 82,
@@ -782,7 +730,7 @@ const DATA = {
       "lon": -74.90658333
     },
     {
-      "row": 33,
+      "row": 31,
       "instalacion": 75,
       "codmun": 13894,
       "cod_cotecmar": 93,
@@ -808,7 +756,7 @@ const DATA = {
       "lon": -73.802722
     },
     {
-      "row": 34,
+      "row": 32,
       "instalacion": 76,
       "codmun": 73030,
       "cod_cotecmar": null,
@@ -834,7 +782,7 @@ const DATA = {
       "lon": -74.76352222
     },
     {
-      "row": 35,
+      "row": 33,
       "instalacion": 77,
       "codmun": 50568,
       "cod_cotecmar": 73,
@@ -860,7 +808,7 @@ const DATA = {
       "lon": -73.942175
     },
     {
-      "row": 36,
+      "row": 34,
       "instalacion": 78,
       "codmun": 13160,
       "cod_cotecmar": null,
@@ -886,7 +834,7 @@ const DATA = {
       "lon": -72.0772519444444
     },
     {
-      "row": 37,
+      "row": 35,
       "instalacion": 79,
       "codmun": 15047,
       "cod_cotecmar": 95,
@@ -912,7 +860,7 @@ const DATA = {
       "lon": -72.883224
     },
     {
-      "row": 38,
+      "row": 36,
       "instalacion": 80,
       "codmun": 47692,
       "cod_cotecmar": null,
@@ -938,7 +886,7 @@ const DATA = {
       "lon": -74.38416667
     },
     {
-      "row": 39,
+      "row": 37,
       "instalacion": 81,
       "codmun": 41885,
       "cod_cotecmar": 72,
@@ -964,7 +912,7 @@ const DATA = {
       "lon": -75.5092727777778
     },
     {
-      "row": 40,
+      "row": 38,
       "instalacion": 82,
       "codmun": 70124,
       "cod_cotecmar": null,
@@ -990,7 +938,7 @@ const DATA = {
       "lon": -75.1008774
     },
     {
-      "row": 41,
+      "row": 39,
       "instalacion": 83,
       "codmun": null,
       "cod_cotecmar": null,
@@ -1016,7 +964,7 @@ const DATA = {
       "lon": null
     },
     {
-      "row": 42,
+      "row": 40,
       "instalacion": 84,
       "codmun": null,
       "cod_cotecmar": null,
@@ -1042,7 +990,7 @@ const DATA = {
       "lon": null
     },
     {
-      "row": 43,
+      "row": 41,
       "instalacion": 85,
       "codmun": 19780,
       "cod_cotecmar": 80,
@@ -1068,7 +1016,7 @@ const DATA = {
       "lon": null
     },
     {
-      "row": 44,
+      "row": 42,
       "instalacion": 86,
       "codmun": 73563,
       "cod_cotecmar": null,
@@ -1094,7 +1042,7 @@ const DATA = {
       "lon": -74.88624722
     },
     {
-      "row": 45,
+      "row": 43,
       "instalacion": 87,
       "codmun": null,
       "cod_cotecmar": null,
@@ -1120,7 +1068,7 @@ const DATA = {
       "lon": null
     },
     {
-      "row": 46,
+      "row": 44,
       "instalacion": 88,
       "codmun": null,
       "cod_cotecmar": null,
